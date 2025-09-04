@@ -1,0 +1,70 @@
+<!--
+  Вставьте этот файл целиком в блок T123 (HTML) в Тильде.
+  Для редактирования визуально: меняйте значения CSS‑переменных в секции :root внизу.
+  Календарь — Flatpickr (CDN). Можно использовать в бесплатном тарифе.
+-->
+<div class="ng-hero-wrap">
+  <style>
+    :root {
+      --ng-bg: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2400&auto=format&fit=crop');
+      --ng-overlay: rgba(0,0,0,.45);
+      --ng-text: #fff;
+      --ng-accent: #f0d155;
+      --ng-accent-text: #222;
+      --ng-form-bg: rgba(255,255,255,.92);
+    }
+    .ng-hero-wrap { position: relative; min-height: 92vh; display: grid; place-items: center; color: var(--ng-text); }
+    .ng-hero-wrap::before{content:"";position:absolute;inset:0;background:var(--ng-overlay);z-index:1}
+    .ng-hero { position: relative; z-index: 2; width: min(1200px, 92vw); display: grid; gap: 34px; justify-items: center; }
+    .ng-title{margin:0;font-weight:800;letter-spacing:.06em;text-align:center;font-size:clamp(40px,9vw,140px)}
+    .ng-form{width:100%;background:var(--ng-form-bg);color:#111;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);padding:18px}
+    .ng-grid{display:grid;grid-template-columns:2fr 1fr 1.5fr auto;gap:12px;align-items:end}
+    .ng-field{display:grid;gap:6px}
+    .ng-label{font-size:14px;font-weight:600;color:#333}
+    .ng-input{height:48px;border-radius:10px;border:1px solid #e2e2e2;padding:0 14px;font-size:16px}
+    .ng-cta{height:48px;border:none;border-radius:999px;padding:0 22px;background:var(--ng-accent);color:var(--ng-accent-text);font-weight:800;cursor:pointer}
+    .ng-note{margin:10px 6px 0;color:#555;font-size:12px}
+    @media (max-width:900px){.ng-grid{grid-template-columns:1fr 1fr}.ng-cta{grid-column:1/-1;width:100%}}
+    @media (max-width:520px){.ng-grid{grid-template-columns:1fr}.ng-hero-wrap{min-height:86vh}}
+  </style>
+  <div class="ng-hero" style="background-image:var(--ng-bg);background-size:cover;background-position:center;position:absolute;inset:0;z-index:0"></div>
+  <div class="ng-hero">
+    <h1 class="ng-title">NATURE GLAMP</h1>
+    <form class="ng-form" id="ng-booking">
+      <div class="ng-grid">
+        <label class="ng-field"><span class="ng-label">Даты</span>
+          <input class="ng-input" id="ng-dates" type="text" placeholder="Заезд — Выезд" autocomplete="off" />
+        </label>
+        <label class="ng-field"><span class="ng-label">Гости</span>
+          <input class="ng-input" id="ng-guests" type="number" min="1" max="12" value="2" />
+        </label>
+        <label class="ng-field"><span class="ng-label">Тип домика</span>
+          <select class="ng-input" id="ng-house">
+            <option>A‑frame</option>
+            <option>Сферический</option>
+            <option>Семейный</option>
+          </select>
+        </label>
+        <button class="ng-cta" type="submit">Оставить заявку</button>
+      </div>
+      <p class="ng-note">Мы перезвоним для подтверждения бронирования</p>
+    </form>
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
+<script>
+  (function(){
+    const locale = window.flatpickr?.l10ns?.ru || undefined;
+    flatpickr('#ng-dates', { mode:'range', minDate:'today', dateFormat:'d.m.Y', locale, conjunction:' — ', disableMobile:true });
+    document.getElementById('ng-booking').addEventListener('submit', function(e){
+      e.preventDefault();
+      const dates = document.getElementById('ng-dates').value;
+      const guests = document.getElementById('ng-guests').value;
+      const house = document.getElementById('ng-house').value;
+      alert('Заявка отправлена!\nДаты: ' + dates + '\nГости: ' + guests + '\nДомик: ' + house);
+    });
+  })();
+</script>
+
