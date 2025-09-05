@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>La Дача — аренда домика в лесу</title>
+    <meta name="description" content="Уютный домик в сосновом лесу: баня, камин, терраса, костровая. Бронирование дат онлайн." />
+    <style>
+      :root {
+        --green: #1b5e20;
+        --beige: #f3eee7;
+        --charcoal: #1c1c1c;
+        --terracotta: #c1583f;
+        --muted: #6b6b6b;
+        --white: #ffffff;
+        --maxw: 1200px;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif; color: var(--charcoal); background: var(--beige); }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; height: auto; }
+
+      /* Header */
+      header { position: sticky; top: 0; z-index: 50; background: rgba(243,238,231,0.9); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid #e3ded6; }
+      .nav { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+      .brand { font-weight: 700; letter-spacing: 0.5px; color: var(--green); }
+      .menu { display: flex; gap: 18px; font-size: 15px; }
+      .menu a { padding: 8px 10px; border-radius: 8px; }
+      .menu a:hover { background: #e8e2d8; }
+      .cta { color: var(--white); background: var(--terracotta); padding: 10px 14px; border-radius: 10px; font-weight: 600; }
+
+      /* Hero */
+      .hero { position: relative; min-height: 78vh; display: grid; place-items: center; text-align: center; color: var(--white); }
+      .hero::before { content: ""; position: absolute; inset: 0; background: url('./banner.jpg') center/cover no-repeat, linear-gradient(180deg, #0006, #0004); filter: saturate(105%); }
+      .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #00000080, #00000060); }
+      .hero-inner { position: relative; padding: 80px 20px; max-width: 860px; }
+      .hero h1 { margin: 0 0 14px; font-size: clamp(36px, 6vw, 60px); line-height: 1.08; letter-spacing: 0.2px; }
+      .hero p { margin: 0 auto 26px; max-width: 720px; font-size: clamp(16px, 2.4vw, 20px); color: #f7f4ef; }
+      .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+      .btn { display: inline-block; padding: 12px 18px; border-radius: 12px; font-weight: 600; border: 1px solid transparent; }
+      .btn-primary { background: var(--terracotta); color: #fff; }
+      .btn-primary:hover { filter: brightness(0.95); }
+      .btn-light { background: #ffffff; color: var(--charcoal); border-color: #ffffff; }
+      .btn-light:hover { background: #fff3; color: #fff; border-color: #fff3; }
+
+      /* Sections */
+      section { padding: 72px 20px; }
+      .wrap { max-width: var(--maxw); margin: 0 auto; }
+      .section-title { font-size: clamp(28px, 4vw, 40px); margin: 0 0 18px; color: var(--green); }
+      .section-sub { margin: 0 0 32px; color: var(--muted); max-width: 780px; }
+
+      /* Advantages grid */
+      .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+      .cards-3 > * { grid-column: span 4; }
+      .cards-4 > * { grid-column: span 3; }
+      @media (max-width: 960px) { .cards-3 > *, .cards-4 > * { grid-column: span 6; } }
+      @media (max-width: 640px) { .cards-3 > *, .cards-4 > * { grid-column: span 12; } }
+      .card { background: #ffffff; border: 1px solid #eee6da; border-radius: 14px; padding: 18px; box-shadow: 0 6px 16px rgba(27,94,32,0.05); }
+      .card h3 { margin: 0 0 8px; font-size: 18px; }
+      .card p { margin: 0; color: #4b4b4b; }
+
+      /* Pricing */
+      .pricing { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+      .pricing .card { grid-column: span 4; display: flex; flex-direction: column; }
+      .price { font-size: 28px; font-weight: 700; color: var(--charcoal); margin: 6px 0 12px; }
+      .muted { color: var(--muted); font-size: 14px; }
+      .grow { flex: 1 1 auto; }
+      @media (max-width: 960px) { .pricing .card { grid-column: span 6; } }
+      @media (max-width: 640px) { .pricing .card { grid-column: span 12; } }
+
+      /* Reviews */
+      .reviews { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+      .reviews .card { grid-column: span 6; }
+      @media (max-width: 800px) { .reviews .card { grid-column: span 12; } }
+
+      /* Gallery */
+      .gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+      .gallery .tile { grid-column: span 3; aspect-ratio: 4/3; background: #e6e0d7; border: 1px dashed #ccbfae; border-radius: 12px; display: grid; place-items: center; color: #8d8376; font-size: 14px; }
+      @media (max-width: 960px) { .gallery .tile { grid-column: span 4; } }
+      @media (max-width: 640px) { .gallery .tile { grid-column: span 6; } }
+
+      /* Contacts */
+      .contact-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+      .contact-grid > * { grid-column: span 6; }
+      @media (max-width: 800px) { .contact-grid > * { grid-column: span 12; } }
+      .contact-card { background: #ffffff; border: 1px solid #eee6da; border-radius: 14px; padding: 18px; }
+      .map { background: #e6e0d7; border: 1px dashed #ccbfae; border-radius: 14px; min-height: 280px; display: grid; place-items: center; color: #8d8376; }
+
+      /* Booking form */
+      form { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; align-items: end; }
+      .field { grid-column: span 3; display: grid; gap: 6px; }
+      .field label { font-size: 14px; color: var(--muted); }
+      input, select, textarea { width: 100%; padding: 12px 12px; border: 1px solid #e3ded6; border-radius: 10px; background: #fff; font: inherit; }
+      textarea { min-height: 44px; resize: vertical; }
+      .field.w-6 { grid-column: span 6; }
+      .field.w-12 { grid-column: span 12; }
+      .actions { grid-column: span 12; display: flex; gap: 12px; }
+      @media (max-width: 960px) { .field { grid-column: span 6; } .field.w-6, .field.w-12, .actions { grid-column: span 12; } }
+
+      /* Footer */
+      footer { background: #0f2f13; color: #d5ded7; }
+      footer a { color: #fff; text-decoration: underline; }
+      .footer-inner { max-width: var(--maxw); margin: 0 auto; padding: 26px 20px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav">
+        <div class="brand">La Дача</div>
+        <div class="menu">
+          <a href="#home">Главная</a>
+          <a href="#about">О нас</a>
+          <a href="#pricing">Тарифы</a>
+          <a href="#reviews">Отзывы</a>
+          <a href="#gallery">Фото</a>
+          <a href="#contacts">Контакты</a>
+          <a class="cta" href="#booking">Забронировать</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <h1>La Дача — домик в сосновом лесу</h1>
+        <p>Уикенд на природе в 1,5 часа от города. Баня, камин, костровая зона. Терраса и прогулки до озера.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#booking">Проверить даты</a>
+          <a class="btn btn-light" href="#gallery">Посмотреть фото</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About + Advantages -->
+    <section id="about">
+      <div class="wrap">
+        <h2 class="section-title">О нас</h2>
+        <p class="section-sub">Камерный домик среди высоких сосен для пары или небольшой семьи. Натуральное дерево, большие окна, камин. На участке — баня, терраса и костровая. До ближайшего озера — 10 минут пешком.</p>
+        <div class="grid cards-4">
+          <div class="card">
+            <h3>Лес и тишина</h3>
+            <p>Сосновый бор, пение птиц и звёздное небо.</p>
+          </div>
+          <div class="card">
+            <h3>Баня</h3>
+            <p>Дровяная парилка по предварительной записи.</p>
+          </div>
+          <div class="card">
+            <h3>Камин</h3>
+            <p>Живой огонь и уютные вечера в компании.</p>
+          </div>
+          <div class="card">
+            <h3>Костровая зона</h3>
+            <p>Мангал, шампуры и казан на месте.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+      <div class="wrap">
+        <h2 class="section-title">Тарифы</h2>
+        <p class="section-sub">Цены указаны за домик в сутки. Минимальный заезд — 2 ночи в выходные.</p>
+        <div class="pricing">
+          <div class="card">
+            <h3>Будни</h3>
+            <div class="price">от 7 500 ₽ / ночь</div>
+            <p class="muted grow">2 гостя включено, доп. гость +1 000 ₽</p>
+            <a class="btn btn-primary" href="#booking">Выбрать даты</a>
+          </div>
+          <div class="card">
+            <h3>Выходные</h3>
+            <div class="price">от 9 500 ₽ / ночь</div>
+            <p class="muted grow">Минимум 2 ночи</p>
+            <a class="btn btn-primary" href="#booking">Выбрать даты</a>
+          </div>
+          <div class="card">
+            <h3>Праздники</h3>
+            <div class="price">от 11 500 ₽ / ночь</div>
+            <p class="muted grow">Условия уточняйте</p>
+            <a class="btn btn-primary" href="#booking">Выбрать даты</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking form -->
+    <section id="booking">
+      <div class="wrap">
+        <h2 class="section-title">Бронирование</h2>
+        <p class="section-sub">Заполните даты и контакты — мы подтвердим бронь в мессенджере или e‑mail.</p>
+        <form id="bookingForm">
+          <div class="field">
+            <label for="checkin">Дата заезда</label>
+            <input id="checkin" name="checkin" type="date" required />
+          </div>
+          <div class="field">
+            <label for="checkout">Дата выезда</label>
+            <input id="checkout" name="checkout" type="date" required />
+          </div>
+          <div class="field">
+            <label for="guests">Гости</label>
+            <select id="guests" name="guests">
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </div>
+          <div class="field w-6">
+            <label for="name">Имя</label>
+            <input id="name" name="name" type="text" placeholder="Ваше имя" required />
+          </div>
+          <div class="field w-6">
+            <label for="phone">Телефон</label>
+            <input id="phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required />
+          </div>
+          <div class="field w-12">
+            <label for="comment">Комментарий</label>
+            <textarea id="comment" name="comment" placeholder="Пожелания к заезду, бане и т. п."></textarea>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">Отправить заявку</button>
+            <span class="muted">Нажимая, вы соглашаетесь с обработкой персональных данных</span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews">
+      <div class="wrap">
+        <h2 class="section-title">Отзывы</h2>
+        <div class="reviews">
+          <div class="card"><p>«Тихо, пахнет сосной, вечер у камина — идеальный уикенд. Вернёмся летом!» — Анна</p></div>
+          <div class="card"><p>«Баня на дровах огонь. Спасибо за поздний заезд и чистоту.» — Сергей</p></div>
+          <div class="card"><p>«Звёздное небо и костёр — магия. Домик комфортный и тёплый.» — Мария</p></div>
+          <div class="card"><p>«Кухня укомплектована, до озера близко, дети в восторге.» — Игорь</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+      <div class="wrap">
+        <h2 class="section-title">Фото</h2>
+        <p class="section-sub">Загрузите ваши фото в папку рядом с файлом и замените заглушки.</p>
+        <div class="gallery">
+          <div class="tile">Фото 1</div>
+          <div class="tile">Фото 2</div>
+          <div class="tile">Фото 3</div>
+          <div class="tile">Фото 4</div>
+          <div class="tile">Фото 5</div>
+          <div class="tile">Фото 6</div>
+          <div class="tile">Фото 7</div>
+          <div class="tile">Фото 8</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacts -->
+    <section id="contacts">
+      <div class="wrap">
+        <h2 class="section-title">Контакты</h2>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Связаться с нами</h3>
+            <p><strong>Телефон:</strong> <a href="tel:+79990000000">+7 999 000‑00‑00</a></p>
+            <p><strong>WhatsApp / Telegram:</strong> <a href="#">Написать</a></p>
+            <p><strong>E‑mail:</strong> <a href="mailto:info@ladacha.ru">info@ladacha.ru</a></p>
+            <p><strong>Адрес:</strong> Сосновый лес, 10 км от города</p>
+            <p class="muted">Ежедневно 9:00–21:00</p>
+          </div>
+          <div class="map">Здесь будет карта (Яндекс/Google)</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div>© <span id="year"></span> La Дача</div>
+        <div><a href="#">Политика конфиденциальности</a></div>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var targetId = this.getAttribute('href');
+          if (targetId.length > 1) {
+            e.preventDefault();
+            var el = document.querySelector(targetId);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Footer year
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Booking form helpers
+      var checkinEl = document.getElementById('checkin');
+      var checkoutEl = document.getElementById('checkout');
+      var today = new Date();
+      var yyyy = today.getFullYear();
+      var mm = String(today.getMonth() + 1).padStart(2, '0');
+      var dd = String(today.getDate()).padStart(2, '0');
+      var minDate = yyyy + '-' + mm + '-' + dd;
+      checkinEl.min = minDate;
+      checkoutEl.min = minDate;
+
+      function toISO(date) {
+        var y = date.getFullYear();
+        var m = String(date.getMonth() + 1).padStart(2, '0');
+        var d = String(date.getDate()).padStart(2, '0');
+        return y + '-' + m + '-' + d;
+      }
+
+      checkinEl.addEventListener('change', function () {
+        var inDate = new Date(this.value);
+        if (isNaN(inDate)) return;
+        var outDate = new Date(inDate);
+        outDate.setDate(outDate.getDate() + 1);
+        var nextDay = toISO(outDate);
+        checkoutEl.min = nextDay;
+        if (!checkoutEl.value || checkoutEl.value <= this.value) {
+          checkoutEl.value = nextDay;
+        }
+      });
+
+      document.getElementById('bookingForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var payload = {
+          checkin: checkinEl.value,
+          checkout: checkoutEl.value,
+          guests: document.getElementById('guests').value,
+          name: document.getElementById('name').value,
+          phone: document.getElementById('phone').value,
+          comment: document.getElementById('comment').value
+        };
+        alert('Заявка отправлена!\n' + JSON.stringify(payload, null, 2));
+      });
+    </script>
+  </body>
+</html>
+
